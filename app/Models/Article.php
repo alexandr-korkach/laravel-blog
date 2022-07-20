@@ -12,7 +12,7 @@ class Article extends Model
     use Sluggable;
 
 
-    protected $fillable = ['title', 'body', 'img', 'category_id'];
+    protected $fillable = ['title', 'description', 'body', 'img', 'category_id'];
 
 
     /**
@@ -38,6 +38,16 @@ class Article extends Model
     }
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeLastLimit($query, $numbers)
+    {
+        return $query->with('tags', 'category', 'comments', 'user')
+            ->orderBy('created_at', 'desc')->limit($numbers)->get();
     }
 
 

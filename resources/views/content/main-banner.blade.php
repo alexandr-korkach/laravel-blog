@@ -12,8 +12,8 @@
                         <a href="#"><h4>{{ $item->article->shortTitle(40) }}</h4></a>
                         <ul class="post-info">
                             <li><a href="#">{{ $item->article->user->name }}</a></li>
-                            <li>{{ $item->article->created_at }}</li>
-                            <li><a href="#">{{ $item->article->comments->count() }} Comments</a></li>
+                            <li>{{ $item->article->getFormattedDateString() }}</li>
+                            <li><a href="#">{{ $item->article->getFormattedCommentCount() }}</a></li>
                         </ul>
                     </div>
                 </div>

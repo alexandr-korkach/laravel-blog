@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
 
            $articles->each(function ($article) use ($tags_id){
-               \App\Models\Comment::factory(rand(2,10))->create([
+               \App\Models\Comment::factory(rand(0,10))->create([
                   'article_id' => $article->id,
                    'user_id' => rand(1,10)
                ]);

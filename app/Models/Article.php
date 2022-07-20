@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -51,6 +52,19 @@ class Article extends Model
         return Str::limit($this->title, $number);
 
     }
+    public function getFormattedDateString(){
+        $date = Carbon::parse($this->created_at)->locale('uk');
+        return Str::ucfirst($date->translatedFormat('M d, Y'));
+    }
+
+    public function getFormattedCommentCount(){
+        $count = $this->comments()->count();
+        $word = true_wordform($count, 'коментарів', 'коментар', 'коментаря', 'коментарів');
+        return "$count $word";
+
+    }
+
+
 
     public function scopeLastLimit($query, $numbers)
     {
@@ -61,6 +75,10 @@ class Article extends Model
     public function scopeAllPaginate($query, $numbers)
     {
         return $query->with('tags', 'category', 'comments', 'user')->orderBy('created_at', 'desc')->paginate($numbers);
+    }
+    public function scopeFindBySlug($query, $slug)
+    {
+        return $query->with('tags', 'category', 'comments', 'user')->where('slug', $slug)->firstOrFail();
     }
 
 

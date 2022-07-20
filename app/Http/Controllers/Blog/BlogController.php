@@ -11,7 +11,13 @@ class BlogController extends Controller
 {
     public function index(){
 
-        $articles = Article::allPaginate(1);
-        return view('blog', compact('articles'));
+        $articles = Article::allPaginate(6);
+        return view('content.blog', compact('articles'));
+    }
+
+    public function show($slug){
+
+        $article = Article::findBySlug($slug);
+        return view('content.blog-show', compact('article'));
     }
 }

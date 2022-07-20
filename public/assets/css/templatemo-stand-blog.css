@@ -439,6 +439,7 @@ header .navbar {
 .blog-posts .down-content ul.post-info li {
 	display: inline-block;
 	margin-right: 8px;
+
 }
 
 .blog-posts .down-content ul.post-info li:after {

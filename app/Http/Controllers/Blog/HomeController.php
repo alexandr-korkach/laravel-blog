@@ -13,6 +13,6 @@ class HomeController extends Controller
 
         $articles = Article::lastLimit(3);
         $bannerItems = MainBanner::query()->with('article')->get();
-        return view('index', compact('articles', 'bannerItems'));
+        return view('content.index', compact('articles', 'bannerItems'));
     }
 }

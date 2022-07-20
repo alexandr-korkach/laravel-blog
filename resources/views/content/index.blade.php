@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Головна сторінка')
 @section('banner')
-    @include('main-banner')
+    @include('content.main-banner')
 @endsection
 @section('content')
     @foreach($articles as $article)
@@ -12,11 +12,11 @@
                 </div>
                 <div class="down-content">
                     <span>{{ $article->category->title }}</span>
-                    <a href="#"><h4>{{ $article->title }}</h4></a>
+                    <a href="{{ route('blog.show', $article->slug) }}"><h4>{{ $article->title }}</h4></a>
                     <ul class="post-info">
                         <li><a href="#">{{ $article->user->name }}</a></li>
-                        <li><a href="#">{{ $article->created_at }}</a></li>
-                        <li><a href="#">{{ $article->comments->count() }} Коментарів</a></li>
+                        <li><a href="#">{{ $article->getFormattedDateString() }}</a></li>
+                        <li><a href="#">{{ $article->getFormattedCommentCount() }}</a></li>
                     </ul>
                     <p>{{ $article->description }}</p>
                     <div class="post-options">

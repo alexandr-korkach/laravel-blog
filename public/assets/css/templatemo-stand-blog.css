@@ -1,4 +1,4 @@
-/* 
+/*
 
 TemplateMo 551 Stand Blog
 
@@ -246,7 +246,7 @@ header .navbar {
 }
 .navbar .navbar-toggler {
 	border-color: #fff;
-	background-color: #f48840;	
+	background-color: #f48840;
 	height: 46px;
 	outline: none;
 	border-radius: 0px;
@@ -303,6 +303,8 @@ header .navbar {
 .owl-banner .item .item-content ul li {
 	display: inline-block;
 	margin-right: 8px;
+    color: #fff;
+    font-weight: 500;
 }
 
 .owl-banner .item .item-content ul li:after {

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use App\Models\Article;
 
@@ -37,8 +38,10 @@ class DatabaseSeeder extends Seeder
                    'user_id' => rand(1,10)
                ]);
                $article->tags()->attach($tags_id->random(3));
-           });
 
+           });
+           $article_id = $articles->first()->id;
+           \App\Models\MainBanner::factory(1)->create(['article_id'=> $article_id]);
 
 
        });

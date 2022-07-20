@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //Paginator::useBootstrap();
+        Paginator::defaultView('layouts.pagination.custom');
+        $this->activeLinks();
+    }
+
+    public function  activeLinks() {
+        View::composer('layouts.main', function($view) {
+            $view->with('mainLink', request()->is('/') ? 'active' : '');
+            $view->with('blogLink', (request()->is('blog') or  request()->is('blog/*')) ? 'active' : '');
+        });
     }
 }

@@ -19,7 +19,7 @@
         </label>
     </div>
     <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Війти</button>
-    <a href="">У мене немає акаунта</a>
+    <a href="{{ route('register.page') }}">У мене немає акаунта</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2022</p>
 </form>
 @endsection

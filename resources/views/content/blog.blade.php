@@ -25,7 +25,7 @@
                         </div>
                         <div class="down-content">
                             <span>{{ $article->category->title }}</span>
-                            <a href="post-details.html"><h4>{{ $article->title }}</h4></a>
+                            <a href="{{ route('blog.show', $article->slug) }}"><h4>{{ $article->title }}</h4></a>
                             <ul class="post-info">
                                 <li><a href="#">{{ $article->user->name }}</a></li>
                                 <li><a href="#">{{ $article->getFormattedDateString() }}</a></li>

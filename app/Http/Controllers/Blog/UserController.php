@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -12,9 +14,6 @@ class UserController extends Controller
         return view('user.login');
     }
 
-    public function registerPage(){
-        return view('user.register');
-    }
 
     public function login(Request $request){
         $credentials = $request->validate([
@@ -46,6 +45,28 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login.page');
+    }
+
+    public function registerPage(){
+        return view('user.register');
+    }
+
+    public function store(RegisterRequest $request){
+
+
+
+
+        $user = User::create([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        session()->flash('success', 'Успішна реєстрація');
+
+        Auth::login($user);
+
+        return redirect()->home();
     }
 
 

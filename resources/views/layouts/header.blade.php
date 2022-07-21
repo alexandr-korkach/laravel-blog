@@ -16,12 +16,24 @@
                     <a class="nav-link" href="{{ route('blog.index') }}">Блог
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="post-details.html">Реєстрація</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
-                </li>
+
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login.page') }}">Війти</a>
+                    </li>
+                @endguest
+
+
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">{{ auth()->user()->name }}</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">Вийти</a>
+                    </li>
+                @endauth
+
             </ul>
         </div>
     </div>

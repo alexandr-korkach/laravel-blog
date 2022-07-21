@@ -39,7 +39,7 @@
 <div class="col-lg-12">
     <div class="sidebar-item tags">
         <div class="sidebar-heading">
-            <h2>Хмара тегів</h2>
+            <h2>Теги</h2>
         </div>
         <div class="content">
             <ul>

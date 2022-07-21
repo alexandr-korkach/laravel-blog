@@ -17,3 +17,8 @@ Route::get('/', [\App\Http\Controllers\Blog\HomeController::class, 'index'])->na
 Route::get('/blog', [\App\Http\Controllers\Blog\BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [\App\Http\Controllers\Blog\BlogController::class, 'show'])->name('blog.show');
 
+Route::get('/login', [\App\Http\Controllers\Blog\UserController::class, 'loginPage'])->name('login.page');
+Route::post('/login', [\App\Http\Controllers\Blog\UserController::class, 'login'])->name('login');
+
+Route::get('/logout', [\App\Http\Controllers\Blog\UserController::class, 'logout'])->name('logout');
+

@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-content">
-                            <h4>Recent Posts</h4>
-                            <h2>Our Recent Blog Entries</h2>
+                            <h4>"{{ request()->q }}"</h4>
+                            <h2>Результати пошуку - {{ $articles->count() }}</h2>
                         </div>
                     </div>
                 </div>
@@ -17,12 +17,15 @@
     </div>
 @endsection
 @section('content')
+        @if($articles->count())
         @foreach($articles as $article)
                 <div class="col-lg-6">
-                   @include('content.blog-post')
+                    @include('content.blog-post')
                 </div>
         @endforeach
-                {{ $articles->onEachSide(1)->links() }}
-
+                {{ $articles->onEachSide(1)->appends(['q'=>request()->q])->links() }}
+        @else
+            Нажаль нічого не знайдено.
+        @endif
 
 @endsection

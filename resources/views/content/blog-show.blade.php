@@ -38,9 +38,9 @@
                                 <li><i class="fa fa-tags"></i></li>
                                 @foreach($article->tags as $tag)
                                     @if(!$loop->last)
-                                        <li><a href="#">{{ $tag->title }}</a>,</li>
+                                        <li><a href="{{ route('blog.by-tag', $tag->slug) }}">{{ $tag->title }}</a>,</li>
                                     @else
-                                        <li><a href="#">{{ $tag->title }}</a></li>
+                                        <li><a href="{{ route('blog.by-tag', $tag->slug) }}">{{ $tag->title }}</a></li>
                                     @endif
                                 @endforeach
                             </ul>
@@ -57,9 +57,56 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-12" id="comments">
+        @auth()
+            <div class="sidebar-item submit-comment">
+                <div class="sidebar-heading">
+                    <h2>Введіть ваш коментар</h2>
+                </div>
+                <div class="content">
+                    <form id="comment" action="{{ route('blog.comments.create') }}" method="get">
+                        @csrf
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <fieldset>
+
+                                    <textarea name="message" class="@error('message') is-invalid @enderror"  rows="6" id="message" placeholder="Введіть ваш коментар" required="">
+                                        {{ old('message') }}
+                                    </textarea>
+                                    @error('message')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button">Відправити</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endauth
+        @guest()
+            <div class="sidebar-item submit-comment">
+                <div class="sidebar-heading">
+                    <h2><a href="{{ route('login.page') }}">Війти</a>, щоб мати можливість залишати коментарі</h2>
+                </div>
+
+            </div>
+        @endguest
+    </div>
     @if($article->comments->count())
     <div class="col-lg-12">
-        <div class="sidebar-item comments" id="comments">
+        <div class="sidebar-item comments" >
+            @if(session('success'))
+                <div class="alert alert-success " role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="sidebar-heading">
                 <h2>{{ $article->getFormattedCommentCount() }}</h2>
             </div>
@@ -71,7 +118,14 @@
                             <img src="{{ $comment->user->avatar }}" alt="">
                         </div>
                         <div class="right-content">
-                            <h4>{{ $comment->user->name }}<span>{{ $comment->getFormattedDateString() }}</span></h4>
+                            <h4>{{ $comment->user->name }}<span>{{ $comment->getFormattedDateString() }}</span>
+                              @if(auth()->check() && (auth()->user() == $comment->user))
+                                <form action="{{ route('blog.comments.destroy', $comment->id) }}" class="comments-delete" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit"   value="Видалити коментар">
+
+                                </form>@endif</h4>
                             <p>{{ $comment->body }}</p>
                         </div>
                     </li>
@@ -82,42 +136,5 @@
         </div>
     </div>
     @endif
-    <div class="col-lg-12">
-        <div class="sidebar-item submit-comment">
-            <div class="sidebar-heading">
-                <h2>Your comment</h2>
-            </div>
-            <div class="content">
-                <form id="comment" action="#" method="post">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Your name" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <fieldset>
-                                <input name="email" type="text" id="email" placeholder="Your email" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-12 col-sm-12">
-                            <fieldset>
-                                <input name="subject" type="text" id="subject" placeholder="Subject">
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <fieldset>
-                                <textarea name="message" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <fieldset>
-                                <button type="submit" id="form-submit" class="main-button">Submit</button>
-                            </fieldset>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 @endsection

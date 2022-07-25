@@ -303,8 +303,10 @@ header .navbar {
 .owl-banner .item .item-content ul li {
 	display: inline-block;
 	margin-right: 8px;
+    font-size: 14px;
     color: #fff;
     font-weight: 500;
+    transition: all .3s;
 }
 
 .owl-banner .item .item-content ul li:after {
@@ -566,13 +568,16 @@ ul.page-numbers li a:hover {
 	padding-bottom: 15px;
 	margin-bottom: 25px;
 }
+.blog-posts .sidebar-heading h2 a{
+    color: #f48840;
+}
 
 .blog-posts .comments {
 	margin-top: 30px;
 }
 
 .blog-posts .comments ul li {
-	display: inline-block;
+	display: block;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 	border-bottom: 1px solid #eee;
@@ -608,6 +613,16 @@ ul.page-numbers li a:hover {
 	font-weight: 900;
 	letter-spacing: 0.5px;
 }
+.blog-posts .comments ul li .right-content h4 .comments-delete{
+    display: inline-block;
+    float: right;
+     font-size: 14px;
+     color: #aaa;
+     font-weight: 400;
+     letter-spacing: 0.25px;
+
+}
+
 
 .blog-posts .comments ul li .right-content h4 span {
 	font-size: 14px;
@@ -639,7 +654,6 @@ ul.page-numbers li a:hover {
 	height: 46px;
 	border: 1px solid #eee;
 	font-size: 13px;
-	text-transform: uppercase;
 	font-weight: 500;
 	color: #7a7a7a;
 	outline: none;
@@ -687,6 +701,7 @@ ul.page-numbers li a:hover {
 	margin-top: 0px;
 }
 
+
 .sidebar .sidebar-heading h2 {
 	font-size: 18px;
 	text-transform: uppercase;
@@ -709,9 +724,16 @@ ul.page-numbers li a:hover {
 	outline: none;
 	padding: 0px 15px;
 }
+.sidebar .search input.is-invalid{
+    border: 2px solid #d90e0e;
+
+}
 
 .sidebar .search input::placeholder {
 	color: #aaa;
+}
+.sidebar .search input.is-invalid::placeholder {
+    color: #a14d4d;
 }
 
 .sidebar .recent-posts ul li {
@@ -1065,6 +1087,7 @@ footer p a:hover {
 	.owl-banner .item .item-content .meta-category span {
 		font-size: 18px;
 	}
+
 	.owl-banner .item .item-content {
 		text-align: center;
 		width: 80%;

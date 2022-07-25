@@ -32,7 +32,11 @@ class Tag extends Model
 
 
     public function articles() {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Article::class);
+    }
+
+    public function scopeFindBySlug($query, $slug){
+        return $query->with('articles')->where('slug', $slug)->firstOrFail();
     }
 
 

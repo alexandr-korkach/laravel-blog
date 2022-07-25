@@ -72,14 +72,25 @@ class Article extends Model
             ->orderBy('created_at', 'desc')->limit($numbers)->get();
     }
 
-    public function scopeAllPaginate($query, $numbers)
+    public function scopeAllPaginate($query, $number = 6)
     {
-        return $query->with('tags', 'category', 'comments', 'user')->orderBy('created_at', 'desc')->paginate($numbers);
+        return $query->with('tags', 'category', 'comments', 'user')->orderBy('created_at', 'desc')->paginate($number);
     }
     public function scopeFindBySlug($query, $slug)
     {
         return $query->with('tags', 'category', 'comments', 'user')->where('slug', $slug)->firstOrFail();
     }
+
+    public function scopeAllPaginateByCategory($query, $number = 6)
+    {
+        return $query->with('tags', 'comments', 'user')->orderBy('created_at', 'desc')->paginate($number);
+    }
+    public function scopeSearchByTitle($query, $string, $number = 6){
+        return $query->with('tags', 'category', 'comments', 'user')->where('title', 'LIKE', "%{$string}%")
+            ->orderBy('created_at', 'desc')->paginate($number);
+    }
+
+
 
 
 

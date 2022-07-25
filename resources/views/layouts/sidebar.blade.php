@@ -1,7 +1,11 @@
 <div class="col-lg-12">
     <div class="sidebar-item search">
-        <form id="search_form" name="gs" method="GET" action="#">
-            <input type="text" name="q" class="searchText" placeholder="пошук" autocomplete="on">
+        <form id="search_form"  method="GET" action="{{ route('blog.search') }}">
+            @csrf
+            <input type="text" name="q" class="searchText @error('q') is-invalid @enderror"
+
+                   placeholder="@if($errors->any()){{$errors->first('q')}}
+                    @elseпошук...@endif" autocomplete="on">
         </form>
     </div>
 </div>
@@ -13,7 +17,7 @@
         <div class="content">
             <ul>
                 @foreach($articles as $article)
-                <li><a href="{{ $article->img }}">
+                <li><a href="{{ route('blog.show', $article->slug) }}">
                         <h5>{{ $article->title }}</h5>
                         <span>{{ $article->getFormattedDateString() }}</span>
                     </a></li>
@@ -30,7 +34,7 @@
         <div class="content">
             <ul>
                 @foreach($categories as $category)
-               <li><a href="#">- {{ $category->title }}</a></li>
+               <li><a href="{{ route('blog.by-category', $category->slug) }}">- {{ $category->title }}</a></li>
                 @endforeach
               </ul>
         </div>
@@ -44,7 +48,7 @@
         <div class="content">
             <ul>
                 @foreach($tags as $tag)
-                <li><a href="#">{{ $tag->title }}</a></li>
+                <li><a href="{{ route('blog.by-tag', $tag->slug) }}">{{ $tag->title }}</a></li>
                 @endforeach
             </ul>
         </div>

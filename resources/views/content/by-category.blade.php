@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-content">
-                            <h4>Recent Posts</h4>
-                            <h2>Our Recent Blog Entries</h2>
+                            <h4>Пости за категорією</h4>
+                            <h2>{{ $category->title }}</h2>
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
 @section('content')
         @foreach($articles as $article)
                 <div class="col-lg-6">
-                   @include('content.blog-post')
+                    @include('content.blog-post')
                 </div>
         @endforeach
                 {{ $articles->onEachSide(1)->links() }}

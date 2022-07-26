@@ -30,7 +30,8 @@ Route::get('/search', [\App\Http\Controllers\Blog\SearchController::class, 'sear
 
 
 Route::get('/logout', [\App\Http\Controllers\Blog\UserController::class, 'logout'])->name('logout')->middleware('auth');
-
+Route::get('/profile/{id}', [\App\Http\Controllers\Blog\ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::post('/profile/{id}/set-avatar', [\App\Http\Controllers\Blog\ProfileController::class, 'setAvatar'])->name('profile.avatar')->middleware('auth');
 
 Route::group(['middleware'=> 'guest'], function (){
     Route::get('/login', [\App\Http\Controllers\Blog\UserController::class, 'loginPage'])->name('login.page');

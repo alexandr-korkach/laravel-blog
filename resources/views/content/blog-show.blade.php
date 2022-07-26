@@ -115,7 +115,7 @@
                     @foreach($article->comments as $comment)
                     <li>
                         <div class="author-thumb">
-                            <img src="{{ $comment->user->avatar }}" alt="">
+                            <img src="{{asset('storage/'.$comment->user->avatar )}}" alt="">
                         </div>
                         <div class="right-content">
                             <h4>{{ $comment->user->name }}<span>{{ $comment->getFormattedDateString() }}</span>

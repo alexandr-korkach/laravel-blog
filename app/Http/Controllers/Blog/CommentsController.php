@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommentsController extends Controller
 {
@@ -24,8 +25,8 @@ class CommentsController extends Controller
     }
 
     public function destroy(Comment $comment){
-
-        if($comment && $comment->user == Auth::user()){
+//$comment->user == Auth::user()
+        if($comment && Gate::allows('delete-comment', $comment)){
 
             $comment->delete();
             session()->flash('success', 'Коментар видалено');

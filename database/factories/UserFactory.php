@@ -19,13 +19,13 @@ class UserFactory extends Factory
     public function definition()
     {
         $name = fake()->name();
-        $avatar = 'https://via.placeholder.com/600/5F113B/FFFFFF/?text='.$name;
+       // $avatar = 'img/users/no-avatar.jpg';
         return [
             'name' => $name,
             'email' => fake()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('123'), // 123
-            'avatar' => $avatar,
+          //  'avatar' => $avatar,
             'remember_token' => Str::random(10)
 
         ];

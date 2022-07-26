@@ -104,6 +104,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('vendor/bootstrap/js/bs-custom-file-input.min.js') }}"></script>
 
 <!-- Additional Scripts -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
@@ -111,6 +112,11 @@
 <script src="{{ asset('assets/js/slick.js') }}"></script>
 <script src="{{ asset('assets/js/isotope.js') }}"></script>
 <script src="{{ asset('assets/js/accordions.js') }}"></script>
+<script >
+    $(document).ready(function () {
+        bsCustomFileInput.init()
+    })
+</script>
 
 <script language = "text/Javascript">
     cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
@@ -121,7 +127,9 @@
             t.style.color='#fff';
         }
     }
+
 </script>
+
 
 </body>
 </html>

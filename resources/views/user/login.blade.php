@@ -18,7 +18,7 @@
             <input type="checkbox" name="remember" value="1"> Запам'ятати мене
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Війти</button>
+    <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Увійти</button>
     <a href="{{ route('register.page') }}">У мене немає акаунта</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2022</p>
 </form>

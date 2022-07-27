@@ -30,7 +30,6 @@ class ArticleFactory extends Factory
             'title' => $this->faker->sentence(6, true),
             'body' => $body,
             'description' => $description,
-            'img' => 'https://via.placeholder.com/800/5F113B/FFFFFF/?text=Laravel Blog',
             'user_id' => 1,
             'created_at' => $this->faker->dateTimeBetween('-1 years')
         ];

@@ -19,7 +19,7 @@
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login.page') }}">Війти</a>
+                        <a class="nav-link" href="{{ route('login.page') }}">Увійти</a>
                     </li>
                 @endguest
 

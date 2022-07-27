@@ -27,7 +27,9 @@ class UserController extends Controller
         }
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-
+            if(Auth::user()->role == 'admin'){
+                return redirect()->route('admin.index');
+            }
             return redirect()->intended('/');
         }
 

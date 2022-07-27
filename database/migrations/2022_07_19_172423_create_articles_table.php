@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('body');
             $table->string('img')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('restrict');
-            $table->foreignId('user_id')->default(1)->constrained()->onDelete('restrict');
+            $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->timestamps();
         });
     }

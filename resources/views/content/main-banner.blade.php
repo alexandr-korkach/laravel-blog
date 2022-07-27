@@ -3,7 +3,7 @@
         <div class="owl-banner owl-carousel">
             @foreach($bannerItems as $item)
             <div class="item">
-                <img src="{{ $item->article->img }}" alt="">
+                <img src="{{ $item->article->getImage() }}" alt="">
                 <div class="item-content">
                     <div class="main-content">
                         <div class="meta-category">

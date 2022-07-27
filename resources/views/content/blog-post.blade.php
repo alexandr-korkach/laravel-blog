@@ -1,6 +1,6 @@
 <div class="blog-post">
     <div class="blog-thumb">
-        <img src="{{ $article->img }}" alt="">
+        <img src="{{ $article->getImage() }}" alt="">
     </div>
     <div class="down-content">
         <span>{{ $article->category->title }}</span>
@@ -10,7 +10,7 @@
             <li><a href="#">{{ $article->getFormattedDateString() }}</a></li>
             <li><a href="{{ route('blog.show', $article->slug) }}#comments">{{ $article->getFormattedCommentCount() }}</a></li>
         </ul>
-        <p>{{ $article->description }}</p>
+        <div class="content">{{ $article->description }}</div>
         <div class="post-options">
             <div class="row">
                 <div class="col-6">

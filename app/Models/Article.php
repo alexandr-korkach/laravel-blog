@@ -6,8 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class Article extends Model
 {
@@ -15,7 +17,7 @@ class Article extends Model
     use Sluggable;
 
 
-    protected $fillable = ['title', 'description', 'body', 'img', 'category_id'];
+    protected $fillable = ['title', 'description', 'body', 'img', 'category_id', 'user_id'];
 
 
     /**
@@ -63,6 +65,35 @@ class Article extends Model
         return "$count $word";
 
     }
+    public static function uploadImage(Request $request, $image = null)
+    {
+        if ($request->hasFile('img')) {
+            if ($image) {
+                Storage::delete($image);
+            }
+            $folder = date('Y-m-d');
+            return $request->file('img')->store("img/articles/$folder");
+
+        }
+
+        return $image;
+
+    }
+
+
+    public function getImage()
+    {
+
+        if ($this->img) {
+
+            return asset("storage/{$this->img}");
+        }
+        return asset('storage/img/articles/no-image.jpg');
+
+    }
+
+
+
 
 
 

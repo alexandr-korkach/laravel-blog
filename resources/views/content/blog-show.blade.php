@@ -20,7 +20,7 @@
     <div class="col-lg-12">
         <div class="blog-post">
             <div class="blog-thumb">
-                <img src="{{ $article->img }}" alt="">
+                <img src="{{ $article->getImage() }}" alt="">
             </div>
             <div class="down-content">
                 <span>{{ $article->category->title }}</span>
@@ -30,7 +30,7 @@
                     <li><a href="#">{{ $article->getFormattedDateString() }}</a></li>
                     <li><a href="#comments">{{ $article->getFormattedCommentCount() }}</a></li>
                 </ul>
-                <p>{{ $article->body }}</p>
+                <div class="content">{!! $article->body !!}</div>
                 <div class="post-options">
                     <div class="row">
                         <div class="col-6">

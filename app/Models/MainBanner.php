@@ -17,6 +17,10 @@ class MainBanner extends Model
         return $this->belongsTo(Article::class);
     }
 
+    public function scopeGetItems($query){
+        return $query->with('article')->orderBy('created_at', 'desc')->get();
+    }
+
 
 
 

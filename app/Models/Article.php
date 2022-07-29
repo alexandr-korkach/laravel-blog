@@ -54,6 +54,11 @@ class Article extends Model
         return Str::limit($this->title, $number);
 
     }
+    public function shortCreatedAt(){
+
+        return Str::substr($this->created_at,0, 10);
+
+    }
     public function getFormattedDateString(){
         $date = Carbon::parse($this->created_at)->locale('uk');
         return Str::ucfirst($date->translatedFormat('M d, Y'));
@@ -112,12 +117,16 @@ class Article extends Model
         return $query->with('tags', 'category', 'comments', 'user')->where('slug', $slug)->firstOrFail();
     }
 
-    public function scopeAllPaginateByCategory($query, $number = 6)
-    {
-        return $query->with('tags', 'comments', 'user')->orderBy('created_at', 'desc')->paginate($number);
-    }
+
     public function scopeSearchByTitle($query, $string, $number = 6){
         return $query->with('tags', 'category', 'comments', 'user')->where('title', 'LIKE', "%{$string}%")
+            ->orderBy('created_at', 'desc')->paginate($number);
+    }
+
+    public function scopeAllByDatePaginate($query, $data, $number = 6)
+    {
+
+        return $query->with('tags', 'category', 'comments', 'user')->whereDate('created_at', $data)
             ->orderBy('created_at', 'desc')->paginate($number);
     }
 

@@ -26,7 +26,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Title</h3>
+                    <h3 class="card-title">Баннер</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -36,11 +36,52 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    Start creating your amazing application!
+                    @if(count($bannerItems))
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th style="width: 30px">#</th>
+                                    <th>Назва</th>
+                                    <th>Категорія</th>
+                                    <th>Дата баннеру</th>
+                                    <th>Автор</th>
+                                    <th>Видалити</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($bannerItems as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a href="{{ route('blog.show', $item->article->slug) }}">{{ $item->article->title }}</a></td>
+                                        <td>{{ $item->article->category->title }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ $item->article->user->name }}</td>
+                                        <td>
+                                            <form action="{{ route('banner.remove', ['id'=>$item->article_id]) }}" method="POST" class="float-left">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Видалити статтю з головного баннера?')">
+
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </form>
+                                         </td>
+
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <p>Баннер поки пустий...</p>
+                    @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    Footer
+
                 </div>
                 <!-- /.card-footer-->
             </div>

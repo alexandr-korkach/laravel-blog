@@ -11,8 +11,8 @@
                         </div>
                         <a href="{{ route('blog.show', $item->article->slug) }}"><h4>{{ $item->article->shortTitle(40) }}</h4></a>
                         <ul class="post-info">
-                            <li>{{ $item->article->user->name }}</li>
-                            <li>{{ $item->article->getFormattedDateString() }}</li>
+                            <li><a href="{{ route('blog.by-author', $item->article->user->id) }}">{{ $item->article->user->name }}</a></li>
+                            <li><a href="{{ route('blog.by-date', $item->article->shortCreatedAt()) }}">{{ $item->article->getFormattedDateString() }}</a></li>
                             <li><a href="{{ route('blog.show', $item->article->slug) }}#comments">{{ $item->article->getFormattedCommentCount() }}</a></li>
                         </ul>
                     </div>

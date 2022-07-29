@@ -8,12 +8,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Статті</h1>
+                        <h1>Результати пошуку</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Головна</a></li>
-                            <li class="breadcrumb-item active">Статті</li>
+                            <li class="breadcrumb-item active"><a href="{{ route('articles.index') }}">Статті</a></li>
+                            <li class="breadcrumb-item active">Результати пошуку</li>
                         </ol>
                     </div>
                 </div>
@@ -26,11 +27,11 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Список статей</h3>
+                    <h3 class="card-title">"{{ $q }}"</h3>
 
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('articles.create') }}" class="btn btn-primary mb-3">Додати статтю</a>
+
                 @if(count($articles))
                     <div class="table-responsive">
                     <table class="table table-bordered table-hover text-nowrap">
@@ -96,13 +97,13 @@
                     </table>
                     </div>
                     @else
-                        <p>Статей поки немає...</p>
+                        <p>Нічого не знайдено...</p>
                     @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
 
-                    {{ $articles->links('pagination::bootstrap-4') }}
+                    {{ $articles->onEachSide(1)->appends(['q'=>request()->q])->links('pagination::bootstrap-4') }}
                 </div>
                 <!-- /.card-footer-->
             </div>

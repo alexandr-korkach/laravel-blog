@@ -11,7 +11,7 @@
     @endforeach
     <div class="col-lg-12">
         <div class="main-button">
-            <a href="#">View All Posts</a>
+            <a href="{{ route('blog.index') }}">View All Posts</a>
         </div>
     </div>
 @endsection

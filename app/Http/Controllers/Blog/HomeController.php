@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index(){
 
         $articles = Article::lastLimit(3);
-        $bannerItems = MainBanner::query()->with('article')->get();
+        $bannerItems = MainBanner::getItems();
         return view('content.index', compact('articles', 'bannerItems'));
     }
 }

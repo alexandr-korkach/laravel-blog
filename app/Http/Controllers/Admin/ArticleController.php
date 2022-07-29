@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\MainBanner;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +21,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $banner = MainBanner::query()->pluck('article_id')->all();
+        //$bannerArticles = Article::query()->with('category', 'tags')->orderBy('created_at', 'desc')->get()->only($banner);
         $articles = Article::query()->with('category', 'tags')->orderBy('created_at', 'desc')->paginate(20);
 
-        return view('admin.articles.index', compact('articles'));
+        return view('admin.articles.index', compact('articles', 'banner'));
     }
 
     /**

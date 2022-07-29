@@ -6,8 +6,8 @@
         <span>{{ $article->category->title }}</span>
         <a href="{{ route('blog.show', $article->slug) }}"><h4>{{ $article->title }}</h4></a>
         <ul class="post-info">
-            <li><a href="#">{{ $article->user->name }}</a></li>
-            <li><a href="#">{{ $article->getFormattedDateString() }}</a></li>
+            <li><a href="{{ route('blog.by-author', $article->user->id) }}">{{ $article->user->name }}</a></li>
+            <li><a href="{{ route('blog.by-date', $article->shortCreatedAt()) }}">{{ $article->getFormattedDateString() }}</a></li>
             <li><a href="{{ route('blog.show', $article->slug) }}#comments">{{ $article->getFormattedCommentCount() }}</a></li>
         </ul>
         <div class="content">{{ $article->description }}</div>

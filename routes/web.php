@@ -18,6 +18,8 @@ Route::get('/blog', [\App\Http\Controllers\Blog\BlogController::class, 'index'])
 Route::get('/blog/{slug}', [\App\Http\Controllers\Blog\BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/tag/{slug}', [\App\Http\Controllers\Blog\BlogController::class, 'allByTag'])->name('blog.by-tag');
 Route::get('/blog/category/{slug}', [\App\Http\Controllers\Blog\BlogController::class, 'allByCategory'])->name('blog.by-category');
+Route::get('/blog/author/{id}', [\App\Http\Controllers\Blog\BlogController::class, 'allByAuthor'])->name('blog.by-author');
+Route::get('/blog/date/{date}', [\App\Http\Controllers\Blog\BlogController::class, 'allByDate'])->name('blog.by-date');
 
 
 Route::get('/blog/comments/create', [\App\Http\Controllers\Blog\CommentsController::class, 'create'])->name('blog.comments.create')->middleware('auth');
@@ -46,6 +48,11 @@ Route::group(['middleware'=> 'guest'], function (){
 Route::group(['prefix'=> 'admin', 'middleware' => 'admin'], function(){
 
     Route::get('/', [\App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin.index');
+    Route::post('/banner/add/{id}', [\App\Http\Controllers\Admin\MainBannerController::class, 'addArticle'])->name('banner.add');
+    Route::delete('/banner/remove/{id}', [\App\Http\Controllers\Admin\MainBannerController::class, 'removeArticle'])->name('banner.remove');
+
+    Route::get('/search', [\App\Http\Controllers\Admin\SearchController::class, 'searchArticle'])->name('admin.search');
+
     Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('/tags', \App\Http\Controllers\Admin\TagController::class);
     Route::resource('/articles', \App\Http\Controllers\Admin\ArticleController::class);
